@@ -1,0 +1,39 @@
+{
+  "backgrounds": [
+    {
+      "id": "day",
+      "label": "Day Valley",
+      "path": "./assets/backgrounds/bg-day.jpg"
+    },
+    {
+      "id": "night",
+      "label": "Night Mountains",
+      "path": "./assets/backgrounds/bg-night.jpg"
+    },
+    {
+      "id": "twilight",
+      "label": "Twilight Realm",
+      "path": "./assets/backgrounds/bg-twilight.jpg"
+    }
+  ],
+  "iconPacks": {
+    "default": {
+      "label": "Default",
+      "discord": "./assets/icons/default/default-1.png",
+      "store": "./assets/icons/default/default-2.png",
+      "vote": "./assets/icons/default/default-3.png"
+    },
+    "fantasy": {
+      "label": "Fantasy",
+      "discord": "./assets/icons/fantasy/fantasy-1.png",
+      "store": "./assets/icons/fantasy/fantasy-2.png",
+      "vote": "./assets/icons/fantasy/fantasy-3.png"
+    },
+    "pixel": {
+      "label": "Pixel",
+      "discord": "./assets/icons/pixel/pixel-1.png",
+      "store": "./assets/icons/pixel/pixel-2.png",
+      "vote": "./assets/icons/pixel/pixel-3.png"
+    }
+  }
+}

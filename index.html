@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Hytale Realm Portal</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-particles" aria-hidden="true"></div>
+
+    <button class="panel-toggle" id="panelToggle" aria-label="Open settings panel">
+      <img class="panel-toggle-logo" id="panelToggleLogo" src="./assets/ui/panel-logo-default.png" alt="" />
+      <span data-i18n="panelTitle">Portal Config</span>
+    </button>
+
+    <aside class="config-panel" id="configPanel" aria-hidden="true">
+      <div class="panel-head">
+        <h2 data-i18n="panelTitle">Portal Config</h2>
+        <button class="icon-btn" id="panelClose" aria-label="Close panel">x</button>
+      </div>
+
+      <div class="panel-tabs">
+        <button class="tab-btn active" data-tab="settings" data-i18n="settingsTab">Settings</button>
+        <button class="tab-btn" data-tab="language" data-i18n="languageTab">Language Editor</button>
+      </div>
+
+      <div class="tab-content active" id="tab-settings">
+        <div class="settings-section">
+          <h3 class="section-title" data-i18n="sectionBranding">Branding</h3>
+          <label>
+            <span data-i18n="languageLabel">Language</span>
+            <select id="cfgLang">
+              <option value="en">EN</option>
+              <option value="de">DE</option>
+              <option value="es">ES</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="titleLabel">Title</span>
+            <input id="cfgTitle" type="text" />
+          </label>
+          <label>
+            <span data-i18n="taglineLabel">Tagline</span>
+            <input id="cfgTagline" type="text" />
+          </label>
+          <label>
+            <span data-i18n="bgPresetLabel">Background Preset</span>
+            <select id="cfgBgPreset"></select>
+          </label>
+        </div>
+
+        <div class="settings-section">
+          <h3 class="section-title" data-i18n="sectionStatus">Server Status</h3>
+          <label>
+            <span data-i18n="addressLabel">Server Address</span>
+            <input id="cfgAddress" type="text" />
+          </label>
+          <p class="help-text" data-i18n="autoStatusHint">
+            Live status is fetched automatically from the server address.
+          </p>
+          <div class="query-diagnostics">
+            <button id="queryTestBtn" class="btn" type="button" data-i18n="queryTestBtn">Test Status</button>
+            <span id="queryTestResult" class="query-test-result neutral" data-i18n="queryTestIdle"
+              >Not tested yet</span
+            >
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3 class="section-title" data-i18n="sectionDesign">Design & Links</h3>
+          <label>
+            <span data-i18n="accentLabel">Accent Color</span>
+            <input id="cfgAccent" type="color" />
+          </label>
+          <label>
+            <span data-i18n="accent2Label">Accent 2 Color</span>
+            <input id="cfgAccent2" type="color" />
+          </label>
+          <label>
+            <span data-i18n="iconPackLabel">Icon Style</span>
+            <select id="cfgIconPack">
+              <option value="default" data-i18n="iconPackDefault">Default</option>
+              <option value="fantasy" data-i18n="iconPackFantasy">Fantasy</option>
+              <option value="pixel" data-i18n="iconPackPixel">Pixel</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="discordLabel">Discord Link</span>
+            <input id="cfgDiscord" type="url" placeholder="https://discord.gg/..." />
+          </label>
+          <label>
+            <span data-i18n="storeLabel">Store Link</span>
+            <input id="cfgStore" type="url" placeholder="https://..." />
+          </label>
+          <label>
+            <span data-i18n="voteLabel">Vote Link</span>
+            <input id="cfgVote" type="url" placeholder="https://..." />
+          </label>
+          <label>
+            <span data-i18n="joinLinkLabel">Join Button Link</span>
+            <input id="cfgJoinLink" type="url" placeholder="https://..." />
+          </label>
+        </div>
+
+        <button id="advancedToggle" class="section-toggle" type="button" data-i18n="advancedToggle">
+          Show advanced settings
+        </button>
+
+        <div id="advancedSettings" class="advanced-settings">
+          <label>
+            <span data-i18n="bgLabel">Background Image URL</span>
+            <input id="cfgBg" type="url" placeholder="https://..." />
+          </label>
+          <label>
+            <span data-i18n="panelLogoLabel">Panel Logo URL</span>
+            <input id="cfgPanelLogo" type="text" placeholder="./assets/ui/panel-logo-default.png" />
+          </label>
+          <label>
+            <span data-i18n="footerLabel">Footer Override</span>
+            <input id="cfgFooterOverride" type="text" />
+          </label>
+        </div>
+
+        <div class="panel-actions">
+          <button id="saveCfgBtn" class="btn primary" data-i18n="save">Save</button>
+          <button id="resetCfgBtn" class="btn" data-i18n="reset">Reset</button>
+          <button id="refreshStatusBtn" class="btn" data-i18n="refreshStatus">Refresh Status</button>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-language">
+        <h3 data-i18n="langEditorTitle">Language Editor</h3>
+        <label>
+          <span data-i18n="langSelectLabel">Language to edit</span>
+          <select id="langEditorSelect">
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="es">Español</option>
+          </select>
+        </label>
+
+        <div class="lang-inputs">
+          <label><span>playNow</span><input data-lang-key="playNow" type="text" /></label>
+          <label><span>join</span><input data-lang-key="join" type="text" /></label>
+          <label><span>discordTitle</span><input data-lang-key="discordTitle" type="text" /></label>
+          <label><span>storeTitle</span><input data-lang-key="storeTitle" type="text" /></label>
+          <label><span>voteTitle</span><input data-lang-key="voteTitle" type="text" /></label>
+          <label><span>panelTitle</span><input data-lang-key="panelTitle" type="text" /></label>
+          <label><span>save</span><input data-lang-key="save" type="text" /></label>
+          <label><span>reset</span><input data-lang-key="reset" type="text" /></label>
+          <label><span>refreshStatus</span><input data-lang-key="refreshStatus" type="text" /></label>
+          <label><span>copied</span><input data-lang-key="copied" type="text" /></label>
+          <label><span>saved</span><input data-lang-key="saved" type="text" /></label>
+          <label><span>statusOffline</span><input data-lang-key="statusOffline" type="text" /></label>
+          <label><span>footerDisclaimer</span><input data-lang-key="footerDisclaimer" type="text" /></label>
+        </div>
+
+        <label>
+          <span data-i18n="advancedJsonLabel">Advanced JSON</span>
+          <textarea id="langEditorJson" rows="10"></textarea>
+        </label>
+
+        <div class="panel-actions">
+          <button id="saveLangOverrideBtn" class="btn primary" data-i18n="saveLangOverrides">
+            Save Language Overrides
+          </button>
+          <button id="resetLangOverrideBtn" class="btn" data-i18n="resetLangOverrides">
+            Reset Language Overrides
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="landing">
+      <section class="hero">
+        <div class="brand">
+          <div class="logo-mark" aria-hidden="true">
+            <span class="logo-inner"></span>
+          </div>
+          <p class="kicker" data-i18n="playNow">Play now</p>
+          <h1 id="serverTitle">Hytale Realm</h1>
+          <p id="serverTagline">Enter the world of adventure, magic and endless creativity.</p>
+        </div>
+
+        <section class="quick-links" aria-label="Quick links">
+          <a class="link-card" id="discordCard" href="#" target="_blank" rel="noreferrer noopener">
+            <div class="card-icon" id="discordIcon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M7 7.8C8.4 6.9 9.5 6.5 10.3 6.2L10.8 7.2C9.7 7.5 8.9 8 8.1 8.6M17 7.8C15.6 6.9 14.5 6.5 13.7 6.2L13.2 7.2C14.3 7.5 15.1 8 15.9 8.6M6.2 16.8C8.4 18.4 10.7 19 12 19C13.3 19 15.6 18.4 17.8 16.8C18.5 14.6 18.9 12.3 18.8 10C17.2 8.9 15.6 8.2 14 7.8C13.6 8.5 13.3 9.3 13 10.1C12.3 10 11.7 10 11 10.1C10.7 9.3 10.4 8.5 10 7.8C8.4 8.2 6.8 8.9 5.2 10C5.1 12.3 5.5 14.6 6.2 16.8Z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle cx="9.5" cy="12.2" r="1" fill="currentColor" />
+                <circle cx="14.5" cy="12.2" r="1" fill="currentColor" />
+              </svg>
+            </div>
+            <p class="card-sub" data-i18n="discordSub">Gather heroes and forge your guild.</p>
+            <h3 data-i18n="discordTitle">Discord Citadel</h3>
+          </a>
+
+          <a class="link-card" id="storeCard" href="#" target="_blank" rel="noreferrer noopener">
+            <div class="card-icon" id="storeIcon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M5 8.5H19L18.2 17.5H5.8L5 8.5ZM8.5 8.5V7.4C8.5 5.8 9.8 4.5 11.4 4.5H12.6C14.2 4.5 15.5 5.8 15.5 7.4V8.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path d="M9.5 12.5H14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <p class="card-sub" data-i18n="storeSub">Fuel the kingdom and unlock realm perks.</p>
+            <h3 data-i18n="storeTitle">Arcane Store</h3>
+          </a>
+
+          <a class="link-card" id="voteCard" href="#" target="_blank" rel="noreferrer noopener">
+            <div class="card-icon" id="voteIcon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 3.5L14.8 9.2L21 10.1L16.5 14.4L17.6 20.5L12 17.5L6.4 20.5L7.5 14.4L3 10.1L9.2 9.2L12 3.5Z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="card-sub" data-i18n="voteSub">Raise our banner across the realms.</p>
+            <h3 data-i18n="voteTitle">Kingdom Voting</h3>
+          </a>
+        </section>
+      </section>
+    </main>
+
+    <div class="join-bar">
+      <a id="joinBtn" class="btn join-btn" href="#" data-i18n="join">Join Realm</a>
+      <div class="status-wrap">
+        <span class="status-dot online" id="statusDot" aria-hidden="true"></span>
+        <span class="status-label" id="statusLabel" data-i18n="onlineLabel">Online</span>
+      </div>
+      <div class="players" id="playersLabelText">685 players online</div>
+      <button class="address-btn" id="addressBtn" type="button">
+        <span class="address-label" id="addressText">play.example.net</span>
+      </button>
+    </div>
+
+    <footer class="footer">
+      <span id="footerText" data-i18n="footerDisclaimer"
+        >An independent Hytale community portal. Not affiliated with Hypixel Studios.</span
+      >
+    </footer>
+
+    <div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="./js/owner-config.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
