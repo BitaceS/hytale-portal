@@ -9,7 +9,7 @@ For feature requests and support, join our Discord: [https://discord.gg/MM23whMg
 ## Quick start
 
 - Open `index.html` in your browser, or
-- Run a local server, e.g. `python3 -m http.server`, then open `http://localhost:8000`
+- Start a local server of your choice and head to `http://localhost:8000`.
 
 ## What you need to know
 
